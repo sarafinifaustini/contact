@@ -57,6 +57,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         // Route::view('/newUser','dashboard.admin.addUser')->name('newUser');
         Route::get('/newUser',[UserController::class,'createUser'])->name('newUser');
         Route::post('/addUser',[UserController::class,'create'])->name('addUser');
+        Route::get('/add/{user}',[UserController::class,'add'])->name('add');
         // Route::view('/edit','dashboard.admin.edit')->name('edit');
         Route::get('/edit',[UserController::class,'editUser'])->name('edit');
         Route::get('/bulkSms',[MessageController::class,'index'])->name('messageList');
@@ -65,7 +66,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::resource('user',UserController::class);
         Route::resource('cat',CatController::class);
 
-     
+
+
 
         // Route::get('/user/{id}', [UserController::class, 'show'])->name('show');
         // Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('destroy');

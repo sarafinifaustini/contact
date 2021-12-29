@@ -33,7 +33,9 @@
                     @endforeach
                 </tbody>
             </table>
+        
         </div>
+       
         <!-- Button trigger modal -->
 
 
@@ -67,6 +69,7 @@
             </div>
         </div>
     </div>
+   
 </div>
 @push('scripts')
 <script>

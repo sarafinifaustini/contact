@@ -6,8 +6,8 @@
             <div class="card">
                 <div class="card-header text-center">
                     Add A user
-                </div>
-                <div class="card-body">
+                    </div>
+                    <div class="card-body">
                     <form action="{{ route('admin.addUser') }}" method="post">
                         @csrf
 
@@ -43,21 +43,21 @@
                         <div class="mt-4 form-group row">
                             <label for="cat_id" class="col-md-4 col-form-label text-md-right">Select a category</label>
                             <div class="col-md-6">
-                            <select class="form-control" name="cat_id" required>
-                                <option value="">Select a category</option>
+                                <select class="form-control" name="cat_id" required>
+                                    <option value="">Select a category</option>
 
-                                @foreach ($cats as $cat)
-                                <option value="{{ $cat->id }}" {{ $cat->id === old('cat_id') ? 'selected' : '' }}>{{
-                                    $cat->category }}</option>
-                                @if ($cat->children)
-                                @foreach ($cat->children as $child)
-                                <option value="{{ $child->id }}" {{ $child->id === old('cat_id') ? 'selected' : ''
-                                    }}>&nbsp;&nbsp;{{
-                                    $child->category }}</option>
-                                @endforeach
-                                @endif
-                                @endforeach
-                            </select>
+                                    @foreach ($cats as $cat)
+                                    <option value="{{ $cat->id }}" {{ $cat->id === old('cat_id') ? 'selected' : '' }}>{{
+                                        $cat->category }}</option>
+                                    @if ($cat->children)
+                                    @foreach ($cat->children as $child)
+                                    <option value="{{ $child->id }}" {{ $child->id === old('cat_id') ? 'selected' : ''
+                                        }}>&nbsp;&nbsp;{{
+                                        $child->category }}</option>
+                                    @endforeach
+                                    @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

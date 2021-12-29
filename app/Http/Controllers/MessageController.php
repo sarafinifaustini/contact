@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class MessageController extends Controller
 {
     public function index(){
-        $messages= Message::all();
+        $messages= Message::paginate(5);
         $users = Cat::all();
         // dd($messages);
         // return $messages;

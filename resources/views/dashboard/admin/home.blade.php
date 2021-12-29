@@ -5,11 +5,11 @@
         {{-- <label for="cat_id">t</label> --}}
        <select data-column="1"  class="form-control filter-select" name="cat_id" >
             <option value="">Filter with category</option>
-        
+
             @foreach ($cats as $cat)
             <option value="{{ $cat->id }}"><h4>{{ $cat->category }}</h4>
             </option>
-           
+
             @endforeach
         </select>
     </div>
@@ -42,6 +42,7 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->cat->category}}</td>
+                <td><a href="{{ route('admin.add', $user->id)}}" class="btn btn-warning">Add</a></td>
                 <td><a href="{{ route('admin.user.edit', $user->id)}}" class="btn btn-primary">Edit</a></td>
                 <td>
                     <form action="{{ route('admin.user.destroy', $user->id)}}" method="post">
@@ -54,13 +55,15 @@
             @endforeach
         </tbody>
     </table>
+    <div class="mt-4">{{ $users->links() }}</div>
+
 </div>
  @endsection
 
  @section('javascript')
 
      <script type="text/javascript" charset="utf8"  src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
- <script>  
+ <script>
 $(document).ready(function(){
 
 var table =$('#datatable').DataTable({

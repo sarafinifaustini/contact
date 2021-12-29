@@ -14,8 +14,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class UserController extends Controller
 {
     public function index(){
-        $u =User::All();
-        $users = userResource::collection($u); 
+        $u =User::paginate(2);
+        $users = userResource::collection($u);
         return $users;
     }
 
@@ -122,13 +122,13 @@ class UserController extends Controller
         $cats = Cat::with('children')->whereNull('parent_id')->get();
 
         $user->save();
-       
+
 
         return redirect('admin\home');
 
     }
       public function show(Request $request){
-        $u =User::All();
+        $u =User::paginate(5);
         // if(request()->ajax()){
         //     if($request->category(){
         //         $data=Cat
@@ -139,6 +139,14 @@ class UserController extends Controller
         $cats = Cat::with('children')->whereNull('parent_id')->get();
         //  return $users;
         return view('dashboard.admin.home',compact('users','cats'));
+    }
+    public function add($user){
+       $oldRecord = User::findOrFail($user);
+       $newRecord = $oldRecord->replicate();
+       $newRecord->setTable('contacts');
+       $newRecord->save();
+       $oldRecord->delete();
+       Return redirect()->back();
     }
 
     public function createUser()
