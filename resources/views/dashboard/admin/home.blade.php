@@ -54,34 +54,36 @@
             @endforeach
         </tbody>
     </table>
-    <div>
-        @endsection
- @section('javascripts')
-<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+</div>
+ @endsection
+
+ @section('javascript')
+
+     <script type="text/javascript" charset="utf8"  src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+ <script>  
 $(document).ready(function(){
-    
-    var table =$('#datatable').DataTable({
-        'processing':true,
-        'serverSide':true,
-        'ajax':"{{ route('admin.home') }}",
-        'columns':[
-            {'data':'name'},
-            {'data':'email'},
-            {'data':'category'},
-               ],
-    });
-    $('.filter-input').keyup (function () {
-        table.column($(this).data('column'))
-        .search($(this).val())
-        .draw();
 
-    });
-    $('.filter-select').change(function () {
-        table.column($(this).data('column'))
-        .search($(this).val())
-        .draw();
-    });
+var table =$('#datatable').DataTable({
+'processing':true,
+'serverSide':true,
+'ajax':"{{ route('admin.home') }}",
+'columns':[
+{'data':'name'},
+{'data':'email'},
+{'data':'category'},
+],
+});
+$('.filter-input').keyup (function () {
+table.column($(this).data('column'))
+.search($(this).val())
+.draw();
+
+});
+$('.filter-select').change(function () {
+table.column($(this).data('column'))
+.search($(this).val())
+.draw();
+});
 })
-
-</script>
-        @endsection
+ </script>
+ @endsection

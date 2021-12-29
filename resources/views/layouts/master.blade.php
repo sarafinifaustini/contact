@@ -171,10 +171,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-@yield('javascripts')
+    <script src="{{ asset('/js/app.js') }}"></script>
+@section('javascript')
     <!-- jQuery -->
-   <script src="{{ asset('/js/app.js') }}"></script>
-
+ 
+@show
 </body>
 
 </html>
