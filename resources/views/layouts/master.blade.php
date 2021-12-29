@@ -134,6 +134,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.contacts') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user-plus"></i>
+                                <p>
+                                    Subscriber Contacts
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -174,7 +182,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('/js/app.js') }}"></script>
 @section('javascript')
     <!-- jQuery -->
- 
+
 @show
 </body>
 

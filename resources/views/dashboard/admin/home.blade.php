@@ -1,5 +1,32 @@
 @extends('layouts.master')
 @section('content')
+@if (Session::has('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">Success!</h4>
+    <p>{{ Session::get('success') }}</p>
+
+    <button type="button" class="close" data-dismiss="alert aria-label=" Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+
+@if (Session::has('errors'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">Error!</h4>
+    <p>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    </p>
+
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 <div>
     <div class="form-group">
         {{-- <label for="cat_id">t</label> --}}
@@ -32,7 +59,9 @@
                 <td>Name</td>
                 <td>Email</td>
                 <td>Category</td>
+                <td colspan="1"></td>
                 <td colspan="1">Action</td>
+                <td colspan="1"></td>
             </tr>
         </thead>
         <tbody>
@@ -42,7 +71,7 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->cat->category}}</td>
-                <td><a href="{{ route('admin.add', $user->id)}}" class="btn btn-warning">Add</a></td>
+                <td><a href="{{ route('admin.add',[$user->id,$user->email])}}" class="btn btn-warning">Add</a></td>
                 <td><a href="{{ route('admin.user.edit', $user->id)}}" class="btn btn-primary">Edit</a></td>
                 <td>
                     <form action="{{ route('admin.user.destroy', $user->id)}}" method="post">

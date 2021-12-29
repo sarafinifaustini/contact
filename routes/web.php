@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Http\Controllers\CatController;
 // use App\Http\Controllers\User\Auth;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
@@ -54,10 +55,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
          Route::get('/home',[UserController::class,'show'])->name('home');
         Route::post('/logout',[AdminController::class,'logout'])->name('logout');
-        // Route::view('/newUser','dashboard.admin.addUser')->name('newUser');
+        //  Route::view('/contacts','dashboard.admin.cats.contacts')->name('contacts');
+        Route::get('/contacts',[ContactController::class,'show'])->name('contacts');
         Route::get('/newUser',[UserController::class,'createUser'])->name('newUser');
         Route::post('/addUser',[UserController::class,'create'])->name('addUser');
-        Route::get('/add/{user}',[UserController::class,'add'])->name('add');
+        Route::get('/add/{user}/{email}',[UserController::class,'add'])->name('add');
         // Route::view('/edit','dashboard.admin.edit')->name('edit');
         Route::get('/edit',[UserController::class,'editUser'])->name('edit');
         Route::get('/bulkSms',[MessageController::class,'index'])->name('messageList');
@@ -65,7 +67,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('send/sms',[MessageController::class,'send'])->name('send');
         Route::resource('user',UserController::class);
         Route::resource('cat',CatController::class);
-
+        Route::get('/contactsIndex',[ContactController::class,'index'])->name('contactIndex');
+        Route::get('news',[CatController::class,'news'])->name('news');
+        Route::get('sports',[CatController::class,'sports'])->name('sports');
+        Route::get('politics',[CatController::class,'politics'])->name('politics');
+        Route::get('business',[CatsController::class,'business'])->name('business');
 
 
 

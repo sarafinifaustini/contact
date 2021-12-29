@@ -22,8 +22,8 @@ import { createApp } from "vue/dist/vue.esm-bundler.js";
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('category-index', require('./components/CategoryIndex.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('category-index', require('./components/CategoryIndex.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

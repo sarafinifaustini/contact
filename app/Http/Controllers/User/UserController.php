@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Cat;
 use App\Models\User;
+use App\Models\Contacts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\userResource;
@@ -20,13 +21,13 @@ class UserController extends Controller
     }
 
    public function create(Request $request){
-    //  dd($request);
+   
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'cat' => 'required',
             'password' => 'required|confirmed',
-            // 'cpassword'=>'required|min:5|max:30|same:password',
+           
         ]);
 
         $user = new User();
@@ -35,7 +36,7 @@ class UserController extends Controller
         $user->cat_id= '1';
         $user->password = \Hash::make($request->password);
         $save = $user->save();
-        // dd($save);
+
         if($save) {
             return redirect('admin/home')->with('Success','User Created Successflly');
         }else
@@ -43,13 +44,13 @@ class UserController extends Controller
 
     }
      public function register(Request $request){
-    //  dd($request);
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'cat' => 'required',
             'password' => 'required|confirmed',
-            // 'cpassword'=>'required|min:5|max:30|same:password',
+
         ]);
 
         $user = new User();
@@ -100,11 +101,7 @@ class UserController extends Controller
           return redirect('admin/home');
         }
         return Response()->json($com);
-        //  Session::flash('flash_message', 'Task successfully deleted!');
-        //  $detail = User::where('id',$id->id)->delete();
-        //  return Response()->json($detail);
-        //  $id->delete();
-        //   return redirect('admin/home');
+
 
    }
     public function update(Request $request,User $user){
@@ -140,13 +137,21 @@ class UserController extends Controller
         //  return $users;
         return view('dashboard.admin.home',compact('users','cats'));
     }
-    public function add($user){
+    public function add($user,$email){
        $oldRecord = User::findOrFail($user);
-       $newRecord = $oldRecord->replicate();
+        $newRecord = $oldRecord->replicate();
+        $newRecord->setTable('contacts');
+       $userExists= Contacts::where('email','=',$email)->first();
+       if($userExists === null){
+
        $newRecord->setTable('contacts');
        $newRecord->save();
        $oldRecord->delete();
        Return redirect()->back();
+       }
+       else{
+           Return redirect()->route('admin.home')->withErrors('Contact already exists');
+       }
     }
 
     public function createUser()

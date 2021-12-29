@@ -56,4 +56,30 @@ public function destroy(Cat $category)
 
         return redirect()->route('admin.cat.index')->withSuccess('You have successfully deleted a Category!');
 }
+
+public function news(){
+    $news = Cat::where('id','=',1)->first();
+     $cats = Cat::with('children')->whereNull('parent_id')->get();
+    return view('dashboard.admin.cats.news',compact('news','cats'));
+}
+public function sports(){
+    $news = Cat::where('id','=',2)->first();
+     $cats = Cat::with('children')->whereNull('parent_id')->get();
+    return view('dashboard.admin.cats.sports',compact('sports','cats'));
+}
+public function politics(){
+    $news = Cat::where('id','=',1)->first();
+     $cats = Cat::with('children')->whereNull('parent_id')->get();
+    return view('dashboard.admin.cats.politics',compact('politics','cats'));
+}
+public function business(){
+    $news = Cat::where('id','=',1)->first();
+     $cats = Cat::with('children')->whereNull('parent_id')->get();
+    return view('dashboard.admin.cats.business',compact('business','cats'));
+}
+
+
+
+
+
 }
